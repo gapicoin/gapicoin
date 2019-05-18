@@ -161,7 +161,13 @@ class MyClientProtocol(WebSocketClientProtocol):
                     print("sigbyte is here", sig)
                     print("sende weas here", payloaded["sender"])
                     wllt = generate_wallet_from_pkey(payloaded["sender"])
-                    if(sig == "reward"):
+                    try:
+                        sigbyte =  bytes.fromhex(sig)
+                        vk = VerifyingKey.from_string(bytes.fromhex(payloaded["sender"]), curve=SECP256k1)
+                        tt = vk.verify(sigbyte, datashash.encode('utf-8')) # True
+                    except BadSignatureError:
+                        print("unbelieveable")
+                        data["response"] = "unbelieveable"
                         newtrans = transaction(sender=payloaded["sender"],
                         senderwallet=wllt,
                         receiver=payloaded["receiver"],
@@ -171,41 +177,23 @@ class MyClientProtocol(WebSocketClientProtocol):
                         nonce=payloaded["nonce"],
                         first_timestamp=payloaded["timestamp"],
                         P2PKH=payloaded["P2PKH"],
-                        verification=True
+                        verification=False
                         ).save()
-                    else:
-                        try:
-                            sigbyte =  bytes.fromhex(sig)
-                            vk = VerifyingKey.from_string(bytes.fromhex(payloaded["sender"]), curve=SECP256k1)
-                            tt = vk.verify(sigbyte, datashash.encode('utf-8')) # True
-                        except BadSignatureError:
-                            print("unbelieveable")
-                            data["response"] = "unbelieveable"
-                            newtrans = transaction(sender=payloaded["sender"],
-                            senderwallet=wllt,
-                            receiver=payloaded["receiver"],
-                            prevblockhash=transaction.objects.all().last().blockhash,
-                            blockhash=payloaded["blockhash"],
-                            amount=payloaded["amount"],
-                            nonce=payloaded["nonce"],
-                            first_timestamp=payloaded["timestamp"],
-                            P2PKH=payloaded["P2PKH"],
-                            verification=False
-                            ).save()
-                            print("badsignature")
-
-                        newtrans = transaction(sender=payloaded["sender"],
-                        senderwallet=wllt,
-                        receiver=payloaded["receiver"],
-                        prevblockhash=transaction.objects.all().last().blockhash,
-                        blockhash=payloaded["blockhash"],
-                        amount=payloaded["amount"],
-                        nonce=payloaded["nonce"],
-                        first_timestamp=payloaded["timestamp"],
-                        P2PKH=payloaded["P2PKH"],
-                        verification=True
-                        ).save()
-
+                        print("badsignature")
+                        return HttpResponse(json.dumps(data), content_type = "application/json")
+                    newtrans = transaction(sender=payloaded["sender"],
+                    senderwallet=wllt,
+                    receiver=payloaded["receiver"],
+                    prevblockhash=transaction.objects.all().last().blockhash,
+                    blockhash=payloaded["blockhash"],
+                    amount=payloaded["amount"],
+                    nonce=payloaded["nonce"],
+                    first_timestamp=payloaded["timestamp"],
+                    P2PKH=payloaded["P2PKH"],
+                    verification=True
+                    ).save()
+                    data["response"] = "Everything works correctly."
+                    return HttpResponse(json.dumps(data), content_type = "application/json")
                 else:
                     print("other message")
                 BroadcastServerFactory.broadcast(payload)
