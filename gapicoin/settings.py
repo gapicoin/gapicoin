@@ -24,7 +24,7 @@ SECRET_KEY = 'j54w1jdm@o(7vmnv=9_duz$c8zg-brf3z%i8yf%9@o(@k4fezu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','138.68.81.114','138.68.81.114','gapicoin.com','www.gapicoin.com']
+ALLOWED_HOSTS = ['localhost','18.217.228.135','18.217.228.135']
 #Currency and Node definations
 CURRENCY = "GAPI"
 NODE_OWNER_WALLET = "GAPIb69f414193b70a5fb6d152150767fa1"
