@@ -73,7 +73,7 @@ example.ini
 cmd = /opt/venv/bin/gunicorn_start
 numprocesses = 1
 [watcher:starttcpconnections]
-cmd = python /opt/venv/gapicoin/server.py
+cmd = python /opt/venv/gapicoin/p2p.py --host 52.15.193.61
 numprocesses = 1
 ```
 
@@ -81,6 +81,12 @@ The file is then passed to circusd:
 ```shell
 circusd example.ini
 ```
+
+To always interact, service stays on continuously circusd:
+```shell
+circusd --daemon example.ini
+```
+
 
 You can exist from program if already running.
 ```shell
