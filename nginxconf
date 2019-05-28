@@ -1,4 +1,4 @@
-upstream hello_app_server {
+upstream gapicoin_server {
   # fail_timeout=0 means we always retry an upstream even if it failed
   # to return a good HTTP response (in case the Unicorn master nukes a
   # single worker for timing out).
@@ -9,7 +9,7 @@ upstream hello_app_server {
 server {
 
     listen   80;
-    server_name 167.99.47.107;
+    server_name 18.219.133.30;
 
     client_max_body_size 4G;
 
@@ -17,11 +17,11 @@ server {
     error_log /opt/venv/logs/nginx-error.log;
 
     location /static/ {
-        alias   /opt/venv/cloudbank/cloudbank/templates/static/;
+        alias   /opt/venv/gapicoin/gapicoin/templates/static/;
     }
 
     location /media/ {
-        alias   /opt/venv/cloudbank/cloudbank/templates/media/;
+        alias   /opt/venv/gapicoin/gapicoin/templates/media/;
     }
 
     location / {
@@ -29,7 +29,7 @@ server {
         proxy_set_header Host $http_host;
         proxy_redirect off;
         if (!-f $request_filename) {
-            proxy_pass http://hello_app_server;
+            proxy_pass http://unix:/opt/venv/gapicoin/gapicoin.sock;
             break;
         }
     }
@@ -37,6 +37,6 @@ server {
     # Error pages
     error_page 500 502 503 504 /500.html;
     location = /500.html {
-        root /opt/venv/cloudbank/cloudbank/templates/static/;
+        root /opt/venv/gapicoin/gapicoin/templates/static/;
     }
 }
