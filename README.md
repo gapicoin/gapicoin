@@ -56,7 +56,14 @@ pipenv install requests
 export DJANGO_SETTINGS_MODULE=gapicoin.settings
 ```
 
-
+## Gunicorn configurations
+The simplest way to install it is to use pip, a tool for installing and managing Python packages:
+```shell
+cd /opt/venv/bin
+wget https://raw.githubusercontent.com/gapicoin/gapicoin/master/gunicorn_start
+chmod u+x gunicorn_start
+. gunicorn_start
+```
 
 
 ## Circus: A Process & Socket Manager configurations
@@ -92,6 +99,20 @@ You can exist from program if already running.
 ```shell
 circusctl quit --waiting
 ```
+
+## Finally we can complate nginx configuration!
+NEWER FORGET TO CHANGE SERVER_NAME WITH YOUR IP ADDRESS FROM NGİNXCONF.!
+```shell
+sudo apt-get install nginx
+sudo service nginx start
+cd /etc/nginx/sites-available
+https://raw.githubusercontent.com/gapicoin/gapicoin/master/nginxconf
+ln -s /etc/nginx/sites-available/nginxconf /etc/nginx/sites-enabled/nginxconf
+cd /opt/venv/
+mkdir logs && cd logs
+touch nginx-access.log && touch nginx-error.log
+```
+
 
 # REST APIs
 
