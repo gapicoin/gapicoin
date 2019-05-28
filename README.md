@@ -80,7 +80,7 @@ example.ini
 cmd = /opt/venv/bin/gunicorn_start
 numprocesses = 1
 [watcher:starttcpconnections]
-cmd = python /opt/venv/gapicoin/p2p.py --host 52.15.193.61
+cmd = python /opt/venv/gapicoin/p2p.py --host 18.222.186.94
 numprocesses = 1
 ```
 
