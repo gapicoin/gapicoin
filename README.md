@@ -106,7 +106,7 @@ NEWER FORGET TO CHANGE SERVER_NAME WITH YOUR IP ADDRESS FROM NGİNXCONF.!
 sudo apt-get install nginx
 sudo service nginx start
 cd /etc/nginx/sites-available
-https://raw.githubusercontent.com/gapicoin/gapicoin/master/nginxconf
+wget https://raw.githubusercontent.com/gapicoin/gapicoin/master/nginxconf
 ln -s /etc/nginx/sites-available/nginxconf /etc/nginx/sites-enabled/nginxconf
 cd /opt/venv/
 mkdir logs && cd logs
