@@ -212,7 +212,7 @@ def syncfirst(host):
     alltrans = requests.get(url).json()
     for x in alltrans["alltestsarecomplated"]:
         try:
-            mytransactions = transaction.objects.get(blockhash=x["blockhash"])
+            mytransactions = transaction.objects.filter(blockhash=x["blockhash"])
         except transaction.DoesNotExist:
             newtrans = transaction(sender=x["sender"],
                 senderwallet=x["senderwallet"],
