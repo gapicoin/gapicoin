@@ -25,6 +25,7 @@ Windows          | [![AppVeyor](https://img.shields.io/badge/build-passing-brigh
 
 ```shell
 sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get install vim -y && sudo apt-get install python-dev -y && sudo apt-get install libevent-dev -y &&  sudo apt-get install python-virtualenv -y && apt-get install git -y
+
 ```
 
 
@@ -32,20 +33,33 @@ sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get install vim -y
 ## Install python last version..
 
 ```shell
-sudo add-apt-repository ppa:fkrull/deadsnakes
-sudo apt-get update
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo add-apt-repository ppa:fkrull/deadsnakes
+sudo apt-get update
 sudo apt-get install python3.4
 sudo apt-get install python3-pip
+apt install python-pip
+sudo apt-get install libzmq3-dev libevent-dev python-dev python-virtualenv
 pip install --upgrade virtualenv
+virtualenv -p python3 venv
+
 ```
 
 ## Other configurations..
 
 ```shell
-virtualenv -p python3 venv
+cd /opt/venv/
+
+. bin/activate
+
+git clone https://github.com/gapicoin/gapicoin.git
+
+cd gapicoin
+
 pip install -r requirements.txt
+
 pipenv install requests
 ```
 
