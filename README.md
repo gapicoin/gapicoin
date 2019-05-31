@@ -36,7 +36,6 @@ sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get install vim -y
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 sudo add-apt-repository ppa:deadsnakes/ppa
-sudo add-apt-repository ppa:fkrull/deadsnakes
 sudo apt-get update
 sudo apt-get install python3.4
 sudo apt-get install python3-pip
