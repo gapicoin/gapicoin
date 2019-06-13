@@ -212,7 +212,7 @@ def sendgapicoin(request):
             )
             newtrans.save()
             ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
-            geturl = "http://{}/api/vi/gettransaction/{}/".format(ip,newtrans.id)
+            geturl = "http://{}/api/v1/gettransaction/{}/".format(ip,newtrans.id)
             test = {"server":False,
             "sender":sender,
             "receiver":receiverwallet,
