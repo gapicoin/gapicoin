@@ -18,7 +18,7 @@ cryptography==2.6.1
 decorator==4.4.0
 Django==2.2.1
 djeasy==2.0.0
-ecdsa==0.13.2
+ecdsa==0.13.3
 gunicorn==19.9.0
 hiredis==1.0.0
 hyperlink==19.0.0
