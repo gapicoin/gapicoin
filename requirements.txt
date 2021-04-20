@@ -4,7 +4,7 @@ arrow==0.13.1
 asn1crypto==0.24.0
 async-timeout==3.0.1
 attrs==19.1.0
-autobahn==19.5.1
+autobahn==20.12.3
 Automat==0.7.0
 bson==0.5.8
 certifi==2019.3.9
